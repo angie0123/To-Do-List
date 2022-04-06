@@ -1,6 +1,7 @@
 import addTask from "./addTask";
 
-export default function () {
+export default function (myToDos) {
+  console.log(myToDos);
   const container = document.createElement("div");
   container.classList.add("main-container");
 
@@ -10,7 +11,7 @@ export default function () {
   container.appendChild(main);
 
   main.appendChild(heading());
-  main.appendChild(addTask());
+  main.appendChild(addTask(myToDos));
 
   return container;
 }

@@ -1,3 +1,5 @@
+import List from "../data/tasks";
+
 export default function addTask() {
   const addTask = document.createElement("div");
   addTask.classList.add("addTask");
@@ -25,6 +27,9 @@ export default function addTask() {
 
 const taskEditor = () => {
   const form = document.createElement("form");
+  form.action = "";
+  form.method = "post";
+  form.id = "task";
   const formContent = document.createElement("div");
   formContent.classList.add("form-content");
   form.appendChild(formContent);
@@ -112,6 +117,7 @@ const addBtnInputs = (container) => {
 
   const dateInput = document.createElement("input");
   dateInput.classList.add("button");
+  dateInput.setAttribute("id", "date");
   dateInput.setAttribute("type", "date");
 
   btnContainer.appendChild(dateInput);
@@ -132,12 +138,27 @@ const nameHandler = (event) => {
 
 const submitHandler = (event) => {
   event.preventDefault();
+
+  const form = document.forms.task;
+  const formData = form.elements;
+
+  const newTask = {};
+  for (let input of formData) {
+    if (input.id) {
+      newTask[input.id] = input.value;
+    }
+  }
+
+  List().add(newTask);
+
+  console.log(newTask);
 };
 
 const projects = ["Welcome!", "New Project"];
 
 const projectDropDown = () => {
   const dropdown = document.createElement("select");
+  dropdown.setAttribute("id", "project");
   dropdown.classList.add("button");
   const inbox = document.createElement("option");
   inbox.value = "inbox";
