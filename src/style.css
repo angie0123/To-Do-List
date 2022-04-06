@@ -133,7 +133,8 @@ form {
 
 form input,
 form textarea,
-form button {
+form button,
+form .button {
   all: unset;
 }
 
@@ -160,14 +161,20 @@ form label {
   padding-bottom: 10px;
 }
 
-.button {
+form .button {
   border-radius: 5px;
   border: 1px solid #ddd;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   color: #555;
   padding: 4px 8px;
+}
+
+form .button option {
+  text-align: center;
+  background: #fff;
 }
 
 .button:hover {

@@ -116,12 +116,7 @@ const addBtnInputs = (container) => {
 
   btnContainer.appendChild(dateInput);
 
-  const projectButton = document.createElement("div");
-  projectButton.textContent = "Inbox";
-  projectButton.classList.add("project-input");
-  projectButton.classList.add("button");
-
-  btnContainer.appendChild(projectButton);
+  btnContainer.appendChild(projectDropDown());
 
   container.appendChild(btnContainer);
 };
@@ -137,4 +132,23 @@ const nameHandler = (event) => {
 
 const submitHandler = (event) => {
   event.preventDefault();
+};
+
+const projects = ["Welcome!", "New Project"];
+
+const projectDropDown = () => {
+  const dropdown = document.createElement("select");
+  dropdown.classList.add("button");
+  const inbox = document.createElement("option");
+  inbox.value = "inbox";
+  inbox.textContent = "inbox";
+  dropdown.appendChild(inbox);
+
+  for (let project of projects) {
+    const listItem = document.createElement("option");
+    listItem.textContent = project;
+    listItem.value = project;
+    dropdown.appendChild(listItem);
+  }
+  return dropdown;
 };
