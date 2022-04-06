@@ -177,6 +177,7 @@ form label {
 
 .btn-inputs-container .button {
   font-size: 17px;
+  width: auto;
 }
 
 .btn-container {

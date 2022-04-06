@@ -47,6 +47,7 @@ const addButtons = (container) => {
 
   const addBtn = document.createElement("button");
   addBtn.disabled = true;
+  addBtn.addEventListener("click", submitHandler);
   addBtn.classList.add("add-btn");
   addBtn.classList.add("button");
   addBtn.textContent = "Add Task";
@@ -80,6 +81,7 @@ const nameField = () => {
   const inputName = document.createElement("input");
   inputName.setAttribute("id", "name");
   inputName.setAttribute("placeholder", "eg. Take out the garbage by 10am");
+  inputName.addEventListener("keyup", nameHandler);
 
   nameField.appendChild(labelName);
   nameField.appendChild(inputName);
@@ -108,18 +110,31 @@ const addBtnInputs = (container) => {
   const btnContainer = document.createElement("div");
   btnContainer.classList.add("btn-inputs-container");
 
-  const dateInput = document.createElement("div");
-  dateInput.textContent = "Schedule";
+  const dateInput = document.createElement("input");
   dateInput.classList.add("button");
+  dateInput.setAttribute("type", "date");
 
   btnContainer.appendChild(dateInput);
 
-  const projectInput = document.createElement("button");
-  projectInput.textContent = "Inbox";
-  projectInput.classList.add("project-input");
-  projectInput.classList.add("button");
+  const projectButton = document.createElement("div");
+  projectButton.textContent = "Inbox";
+  projectButton.classList.add("project-input");
+  projectButton.classList.add("button");
 
-  btnContainer.appendChild(projectInput);
+  btnContainer.appendChild(projectButton);
 
   container.appendChild(btnContainer);
+};
+
+const nameHandler = (event) => {
+  if (event.target.value != "") {
+    const addBtn = document.querySelector(".add-btn");
+    addBtn.disabled = false;
+  } else {
+    addBtn.disabled = true;
+  }
+};
+
+const submitHandler = (event) => {
+  event.preventDefault();
 };
