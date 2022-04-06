@@ -48,11 +48,13 @@ const addButtons = (container) => {
   const addBtn = document.createElement("button");
   addBtn.disabled = true;
   addBtn.classList.add("add-btn");
+  addBtn.classList.add("button");
   addBtn.textContent = "Add Task";
 
   const cancelBtn = document.createElement("button");
   cancelBtn.classList.add("cancel-btn");
-  cancelBtn.textContent = "cancel";
+  cancelBtn.classList.add("button");
+  cancelBtn.textContent = "Cancel";
 
   btnContainer.appendChild(addBtn);
   btnContainer.appendChild(cancelBtn);
@@ -99,15 +101,16 @@ const addBtnInputs = (container) => {
   const btnContainer = document.createElement("div");
   btnContainer.classList.add("btn-inputs-container");
 
-  const dateInput = document.createElement("input");
-  dateInput.setAttribute("type", "date");
-  dateInput.setAttribute("id", "date");
+  const dateInput = document.createElement("div");
+  dateInput.textContent = "Schedule";
+  dateInput.classList.add("button");
 
   btnContainer.appendChild(dateInput);
 
   const projectInput = document.createElement("button");
   projectInput.textContent = "Inbox";
   projectInput.classList.add("project-input");
+  projectInput.classList.add("button");
 
   btnContainer.appendChild(projectInput);
 

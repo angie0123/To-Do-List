@@ -115,3 +115,92 @@ nav + nav {
 .addTask:hover .prompt {
   color: var(--red);
 }
+
+form {
+  padding: 4px 0;
+  margin-bottom: 9px;
+}
+
+.form-content {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 10px 10px 0;
+}
+
+.form-content:focus-within {
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+form input,
+form textarea,
+form button {
+  all: unset;
+}
+
+form input {
+  width: 100%;
+}
+
+form textarea {
+  width: 100%;
+}
+
+input#name::-webkit-input-placeholder {
+  font-weight: bold;
+}
+
+form label {
+  display: none;
+}
+
+.btn-inputs-container {
+  cursor: text;
+  display: flex;
+  column-gap: 4px;
+  padding-bottom: 10px;
+}
+
+.button {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  padding: 4px 8px;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+
+.btn-inputs-container .button {
+  font-size: 17px;
+}
+
+.btn-container {
+  display: flex;
+  margin-left: -12px;
+}
+
+.btn-container .button {
+  margin: 12px 0 0 12px;
+  padding: 0 10px;
+  height: 32px;
+  font-weight: bold;
+}
+
+.button.add-btn {
+  background-color: #db4c3f;
+  color: #fff;
+}
+
+.button.add-btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.button.cancel-btn {
+  color: rgba(0, 0, 0, 0.9);
+}
