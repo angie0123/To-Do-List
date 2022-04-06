@@ -37,7 +37,9 @@ const addTask = () => {
   addTask.appendChild(message);
 
   addTask.onclick = () => {
-    addTask.replaceChildren(taskEditor());
+    const main = addTask.parentNode;
+    main.removeChild(addTask);
+    main.appendChild(taskEditor());
   };
 
   return addTask;
@@ -49,13 +51,14 @@ const taskEditor = () => {
   formContent.classList.add("form-content");
   form.appendChild(formContent);
 
-  addInputs(formContent);
+  addTextInputs(formContent);
+  addBtnInputs(formContent);
   addButtons(form);
 
   return form;
 };
 
-const addInputs = (container) => {
+const addTextInputs = (container) => {
   container.appendChild(nameField());
   container.appendChild(descriptionField());
 };
@@ -112,4 +115,23 @@ const descriptionField = () => {
   descriptionField.appendChild(descriptionName);
   descriptionField.appendChild(descriptionInput);
   return descriptionField;
+};
+
+const addBtnInputs = (container) => {
+  const btnContainer = document.createElement("div");
+  btnContainer.classList.add("btn-inputs-container");
+
+  const dateInput = document.createElement("input");
+  dateInput.setAttribute("type", "date");
+  dateInput.setAttribute("id", "date");
+
+  btnContainer.appendChild(dateInput);
+
+  const projectInput = document.createElement("button");
+  projectInput.textContent = "Inbox";
+  projectInput.classList.add("project-input");
+
+  btnContainer.appendChild(projectInput);
+
+  container.appendChild(btnContainer);
 };
