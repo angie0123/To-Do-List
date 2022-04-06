@@ -2,6 +2,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+  --red: #dd4b39;
 }
 
 body {
@@ -12,10 +14,10 @@ body {
 
 .nav {
   grid-column: 1/3;
-  background: chocolate;
+  background: var(--red);
   height: 5vh;
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 290px 1fr;
   justify-items: start;
 }
 
@@ -31,9 +33,10 @@ body {
 
 .side-nav {
   grid-column: 1;
-  background: #efefef;
+  background: #fafafa;
   height: 95vh;
   padding: 60px 4px 0px 60px;
+  font-size: 14px;
 }
 
 nav ul {
@@ -47,7 +50,7 @@ ul li {
 
 ul li:hover {
   cursor: pointer;
-  background: grey;
+  background: #ececec;
 }
 
 ul li a {
@@ -72,7 +75,7 @@ nav + nav {
 }
 
 .main h1 {
-  font-size: 1.4rem;
+  font-size: 20px;
   margin-bottom: 10px;
 }
 
@@ -83,7 +86,7 @@ nav + nav {
 }
 
 .addTask .icon {
-  color: red;
+  color: var(--red);
   font-size: 2rem;
   display: inline-block;
   width: 20px;
@@ -102,7 +105,7 @@ nav + nav {
 .addTask:hover .icon {
   border-radius: 50%;
   color: white;
-  background: red;
+  background: var(--red);
 }
 
 .addTask .prompt {
@@ -110,5 +113,5 @@ nav + nav {
   color: grey;
 }
 .addTask:hover .prompt {
-  color: red;
+  color: var(--red);
 }
