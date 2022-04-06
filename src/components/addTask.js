@@ -139,6 +139,48 @@ const nameHandler = (event) => {
 const submitHandler = (event) => {
   event.preventDefault();
 
+  addTaskToList();
+
+  const form = document.forms[0];
+  const parent = form.parentNode;
+  parent.removeChild(form);
+  renderTasks(parent, "inbox");
+  parent.appendChild(taskEditor());
+};
+
+const renderTasks = (container) => {
+  //  List.only('inbox');   array of objects
+  const list = [
+    { name: "hello", description: "" },
+    { name: "me too", description: "" },
+  ];
+  for (let obj of list) {
+    container.appendChild(task(obj));
+  }
+};
+
+const task = ({ name, description }) => {
+  const task = document.createElement("div");
+  task.classList.add("task");
+
+  const checkbox = document.createElement("div");
+  checkbox.classList.add("circle-checkbox");
+  task.appendChild(checkbox);
+
+  const taskName = document.createElement("div");
+  taskName.classList.add("task-name");
+  taskName.textContent = name;
+  task.appendChild(taskName);
+
+  const taskDescription = document.createElement("div");
+  taskDescription.classList.add("description");
+  taskDescription.textContent = description;
+  task.appendChild(taskDescription);
+
+  return task;
+};
+
+const addTaskToList = () => {
   const form = document.forms.task;
   const formData = form.elements;
 
@@ -150,8 +192,6 @@ const submitHandler = (event) => {
   }
 
   List().add(newTask);
-
-  console.log(newTask);
 };
 
 const projects = ["Welcome!", "New Project"];
