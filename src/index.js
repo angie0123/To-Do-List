@@ -1,6 +1,6 @@
 import "./style.css";
 import Nav from "./components/Nav";
-// import SideNav from "./components/sideNav";
+import SideNav from "./components/sideNav";
 // import Main from "./components/main/inbox";
 
 class toDo {
@@ -19,3 +19,5 @@ class toDoList {
 
 const nav = Nav();
 document.body.appendChild(nav);
+const sideNav = SideNav();
+document.body.appendChild(sideNav);
