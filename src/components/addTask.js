@@ -1,4 +1,4 @@
-export default function () {
+export default function addTask() {
   const addTask = document.createElement("div");
   addTask.classList.add("addTask");
 
@@ -52,6 +52,13 @@ const addButtons = (container) => {
   addBtn.textContent = "Add Task";
 
   const cancelBtn = document.createElement("button");
+  cancelBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    const form = document.querySelector("form");
+    const parent = form.parentNode;
+    parent.removeChild(form);
+    parent.appendChild(addTask());
+  });
   cancelBtn.classList.add("cancel-btn");
   cancelBtn.classList.add("button");
   cancelBtn.textContent = "Cancel";
