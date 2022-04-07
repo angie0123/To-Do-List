@@ -212,3 +212,11 @@ form .button option {
 .button.cancel-btn {
   color: rgba(0, 0, 0, 0.9);
 }
+
+.task {
+  padding: 8px 0;
+}
+
+.task:hover {
+  cursor: pointer;
+}
