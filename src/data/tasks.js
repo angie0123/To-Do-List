@@ -1,4 +1,4 @@
-export default function () {
+const List = (() => {
   const add = (task) => {
     localStorage.setItem(localStorage.length, JSON.stringify(task));
   };
@@ -21,5 +21,16 @@ export default function () {
     localStorage.setItem(index, task);
   };
 
-  return { add, removeAll, remove, isEmpty, update };
-}
+  const toArray = () => {
+    const list = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const task = JSON.parse(localStorage.getItem(i));
+      list.push(task);
+    }
+    return list;
+  };
+
+  return { add, removeAll, remove, isEmpty, update, toArray };
+})();
+
+export default List;

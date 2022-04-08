@@ -18,16 +18,15 @@ export default function addTask() {
   addTask.appendChild(message);
 
   addTask.onclick = () => {
-    const main = addTask.parentNode;
-    main.removeChild(addTask);
-    main.appendChild(taskEditor());
+    addTask.replaceWith(newTaskForm());
   };
 
   return addTask;
 }
 
-const taskEditor = () => {
+const newTaskForm = () => {
   const form = document.createElement("form");
+  form.setAttribute("id", "newForm");
   const formContent = document.createElement("div");
   formContent.classList.add("form-content");
   form.appendChild(formContent);
@@ -58,7 +57,7 @@ const addButtons = (container) => {
   const cancelBtn = document.createElement("button");
   cancelBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    const form = document.querySelector("form");
+    const form = document.getElementById("newForm");
     const parent = form.parentNode;
     parent.removeChild(form);
     parent.appendChild(addTask());
@@ -158,25 +157,34 @@ const submitHandler = (event) => {
 
   addTaskToList();
 
-  const form = document.forms[0];
-  const parent = form.parentNode;
-  parent.removeChild(form);
-  renderTasks(parent, "inbox");
-  parent.appendChild(taskEditor());
-};
-
-const renderTasks = (container) => {
-  //  List.only('inbox');   array of objects
-  const list = [
-    { name: "hello", description: "", index: "0" },
-    { name: "me too", description: "", index: "1" },
-  ];
-  for (let obj of list) {
-    container.appendChild(task(obj));
+  const form = document.getElementById("newForm");
+  const content = form.parentNode;
+  const newForm = newTaskForm();
+  const newList = taskList();
+  content.removeChild(form);
+  if (document.querySelector(".taskList")) {
+    document.querySelector(".taskList").replaceWith(newList);
+  } else {
+    content.appendChild(newList);
   }
+  content.appendChild(newForm);
 };
 
-const task = ({ name, description, index }) => {
+const taskList = () => {
+  // List.only ('inbox)   coming soon!
+  const container = document.createElement("div");
+  container.classList.add("taskList");
+  const list = List.toArray();
+
+  for (let i = 0; i < list.length; i++) {
+    const listItem = renderTask(list[i], i);
+    container.appendChild(listItem);
+  }
+
+  return container;
+};
+
+const renderTask = ({ name, description }, index) => {
   const task = document.createElement("div");
   task.classList.add("task");
 
@@ -201,7 +209,7 @@ const task = ({ name, description, index }) => {
 };
 
 const addTaskToList = () => {
-  const form = document.forms[0];
+  const form = document.getElementById("newForm");
   const formData = form.elements;
 
   const newTask = {};
@@ -211,5 +219,5 @@ const addTaskToList = () => {
     }
   }
 
-  List().add(newTask);
+  List.add(newTask);
 };

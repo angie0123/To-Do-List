@@ -25,6 +25,7 @@ export default function (event) {
 
 const form = (task) => {
   const form = document.createElement("form");
+  form.setAttribute("id", "editForm");
   const formContent = document.createElement("div");
   formContent.classList.add("form-content");
   form.appendChild(formContent);
@@ -94,7 +95,7 @@ const addButtons = (container) => {
   const cancelBtn = document.createElement("button");
   cancelBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    const form = document.querySelector("form");
+    const form = document.getElementById("editForm");
     const parent = form.parentNode;
     parent.removeChild(form);
     parent.appendChild(addTask());
@@ -160,4 +161,18 @@ const submitHandler = (event, index) => {
   // save task to existing object
 
   updateList(index);
+};
+
+const updateList = (index) => {
+  const form = document.getElementById("editForm");
+  const formData = form.elements;
+
+  const newTask = {};
+  for (let input of formData) {
+    if (input.id) {
+      newTask[input.id] = input.value;
+    }
+  }
+
+  List.update(index, newTask);
 };
