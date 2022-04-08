@@ -174,10 +174,10 @@ const taskList = () => {
   // List.only ('inbox)   coming soon!
   const container = document.createElement("div");
   container.classList.add("taskList");
-  const list = List.toArray();
 
-  for (let i = 0; i < list.length; i++) {
-    const listItem = renderTask(list[i], i);
+  for (let i = 0; i < List.length(); i++) {
+    const taskObj = List.getItem(i);
+    const listItem = renderTask(taskObj, i);
     container.appendChild(listItem);
   }
 
@@ -203,7 +203,9 @@ const renderTask = ({ name, description }, index) => {
   task.appendChild(taskDescription);
   task.setAttribute("data-index", index);
 
-  task.onclick = editForm;
+  task.onclick = () => {
+    editForm(index);
+  };
 
   return task;
 };

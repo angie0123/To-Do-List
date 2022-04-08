@@ -18,7 +18,7 @@ const List = (() => {
   };
 
   const update = (index, task) => {
-    localStorage.setItem(index, task);
+    localStorage.setItem(JSON.stringify(index), JSON.stringify(task));
   };
 
   const toArray = () => {
@@ -30,7 +30,15 @@ const List = (() => {
     return list;
   };
 
-  return { add, removeAll, remove, isEmpty, update, toArray };
+  const length = () => {
+    return localStorage.length;
+  };
+
+  const getItem = (index) => {
+    return JSON.parse(localStorage.getItem(index));
+  };
+
+  return { add, removeAll, remove, isEmpty, update, toArray, length, getItem };
 })();
 
 export default List;

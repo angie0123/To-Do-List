@@ -1,15 +1,8 @@
 import List from "../data/tasks";
 
-export default function (event) {
+export default function (index) {
   const taskIndex = event.currentTarget.getAttribute("data-index");
-  //render a modal and display info of the task
-  //dummy info
-  const task = {
-    name: "uhhh",
-    description: "",
-    date: "",
-    project: "inbox",
-  };
+  const task = List.getItem(index);
 
   const overlay = document.createElement("div");
   overlay.classList.add("overlay");
@@ -18,12 +11,12 @@ export default function (event) {
   card.classList.add("card");
   overlay.appendChild(card);
 
-  card.appendChild(form(task));
+  card.appendChild(form(task, index));
 
   document.body.appendChild(overlay);
 }
 
-const form = (task) => {
+const form = (task, index) => {
   const form = document.createElement("form");
   form.setAttribute("id", "editForm");
   const formContent = document.createElement("div");
@@ -32,7 +25,7 @@ const form = (task) => {
 
   addTextInputs(formContent, task);
   addBtnInputs(formContent, task);
-  addButtons(form);
+  addButtons(form, index);
 
   return form;
 };
@@ -82,15 +75,17 @@ const descriptionField = (task) => {
   return descriptionField;
 };
 
-const addButtons = (container) => {
+const addButtons = (container, index) => {
   const btnContainer = document.createElement("div");
   btnContainer.classList.add("btn-container");
 
-  const addBtn = document.createElement("button");
-  addBtn.addEventListener("click", submitHandler);
-  addBtn.classList.add("primary-btn");
-  addBtn.classList.add("button");
-  addBtn.textContent = "Save";
+  const saveBtn = document.createElement("button");
+  saveBtn.addEventListener("click", () => {
+    submitHandler(index);
+  });
+  saveBtn.classList.add("primary-btn");
+  saveBtn.classList.add("button");
+  saveBtn.textContent = "Save";
 
   const cancelBtn = document.createElement("button");
   cancelBtn.addEventListener("click", (event) => {
@@ -104,7 +99,7 @@ const addButtons = (container) => {
   cancelBtn.classList.add("button");
   cancelBtn.textContent = "Cancel";
 
-  btnContainer.appendChild(addBtn);
+  btnContainer.appendChild(saveBtn);
   btnContainer.appendChild(cancelBtn);
 
   container.appendChild(btnContainer);
@@ -156,9 +151,8 @@ const createProjectOption = (project) => {
   return projectOption;
 };
 
-const submitHandler = (event, index) => {
+const submitHandler = (index) => {
   event.preventDefault();
-  // save task to existing object
 
   updateList(index);
 };
