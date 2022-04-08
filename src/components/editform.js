@@ -155,6 +155,13 @@ const submitHandler = (index) => {
   event.preventDefault();
 
   updateList(index);
+  updateMain();
+  closeModal();
+};
+
+const closeModal = () => {
+  const modal = document.querySelector(".overlay");
+  modal.remove();
 };
 
 const updateList = (index) => {

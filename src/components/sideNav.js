@@ -1,15 +1,13 @@
-export default function () {
+export default function (projects) {
   const sideNav = document.createElement("div");
   sideNav.classList.add("side-nav");
 
   const nav = navList(["Inbox", "Today", "Upcoming"]);
 
-  const projects = navList(["Projects"]);
-
   sideNav.appendChild(nav);
-  sideNav.appendChild(projects);
+  sideNav.appendChild(navList(projects));
 
-  return sideNav;
+  document.body.appendChild(sideNav);
 }
 
 const navList = (list) => {

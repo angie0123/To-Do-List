@@ -4,7 +4,7 @@ export default function () {
 
   nav.appendChild(logo());
 
-  return nav;
+  document.body.append(nav);
 }
 
 const logo = () => {
