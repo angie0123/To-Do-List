@@ -18,12 +18,22 @@ class View {
 
   render() {
     renderNav();
-    rendersideNav(["projects"]); // insert projects here
-    renderMain("inbox", [
-      { name: "ello", description: "meh", date: "", project: "inbox", id: 0 },
-      { name: "two", description: "meh", date: "", project: "inbox", id: 1 },
-      { name: "three", description: "meh", date: "", project: "inbox", id: 2 },
-    ]); //insert route here
+    rendersideNav(["projects"]); // expects all projects
+    renderMain(
+      "inbox",
+      [
+        { name: "ello", description: "meh", date: "", project: "inbox", id: 0 },
+        { name: "two", description: "meh", date: "", project: "inbox", id: 1 },
+        {
+          name: "three",
+          description: "meh",
+          date: "",
+          project: "inbox",
+          id: 2,
+        },
+      ],
+      ["welcome!", "newProject"]
+    ); //expects current route, filtered todos, and all projects
   }
 }
 
