@@ -1,24 +1,25 @@
+import View from "../view";
 import addTask from "./addTask";
+import taskList from "./taskList";
 
-export default function (myToDos) {
-  console.log(myToDos);
-  const container = document.createElement("div");
-  container.classList.add("main-container");
+// component inject route name and todos for that route
+export default function (route, todos) {
+  const container = View.createElement("div", "main-container");
+  const main = View.createElement("div", "main");
+  const heading = createHeading(route);
+  const existingTasks = taskList(todos);
 
-  const main = document.createElement("div");
-  main.classList.add("main");
+  container.append(main);
+  main.append(heading);
+  main.append(existingTasks);
+  // main.appendChild(addTask());
 
-  container.appendChild(main);
-
-  main.appendChild(heading());
-  main.appendChild(addTask(myToDos));
-
-  return container;
+  document.body.appendChild(container);
 }
 
-const heading = () => {
+const createHeading = (route) => {
   const h1 = document.createElement("h1");
-  h1.textContent = "Inbox";
+  h1.textContent = route;
 
   return h1;
 };

@@ -37,11 +37,4 @@ class Model {
   }
 }
 
-const model = new Model();
-model.addTodo({ name: "hi", description: "", date: "", project: "" });
-console.log(model.todos);
-
-model.deleteTodo(0);
-console.log(model.todos);
-
 export default Model;
