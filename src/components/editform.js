@@ -1,3 +1,5 @@
+import List from "../data/tasks";
+
 export default function (event) {
   const taskIndex = event.currentTarget.getAttribute("data-index");
   //render a modal and display info of the task
@@ -49,9 +51,7 @@ const nameField = (task) => {
 
   const inputName = document.createElement("input");
   inputName.setAttribute("id", "name");
-  //
   inputName.value = task.name;
-  inputName.addEventListener("keyup", nameHandler);
 
   nameField.appendChild(labelName);
   nameField.appendChild(inputName);
@@ -86,7 +86,6 @@ const addButtons = (container) => {
   btnContainer.classList.add("btn-container");
 
   const addBtn = document.createElement("button");
-  addBtn.disabled = true;
   addBtn.addEventListener("click", submitHandler);
   addBtn.classList.add("primary-btn");
   addBtn.classList.add("button");
@@ -130,15 +129,6 @@ const addBtnInputs = (container, task) => {
   container.appendChild(btnContainer);
 };
 
-const nameHandler = (event) => {
-  if (event.target.value != "") {
-    const addBtn = document.querySelector(".add-btn");
-    addBtn.disabled = false;
-  } else {
-    addBtn.disabled = true;
-  }
-};
-
 //dummy projects
 const projects = ["Welcome!", "New Project"];
 
@@ -165,14 +155,9 @@ const createProjectOption = (project) => {
   return projectOption;
 };
 
-const submitHandler = (event) => {
+const submitHandler = (event, index) => {
   event.preventDefault();
-  console.log("submitted!");
-  // addTaskToList();
+  // save task to existing object
 
-  // const form = document.forms[0];
-  // const parent = form.parentNode;
-  // parent.removeChild(form);
-  // renderTasks(parent, "inbox");
-  // parent.appendChild(taskEditor());
+  updateList(index);
 };

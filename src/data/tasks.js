@@ -17,5 +17,9 @@ export default function () {
     return localStorage.length === 0;
   };
 
-  return { add, removeAll, remove, isEmpty };
+  const update = (index, task) => {
+    localStorage.setItem(index, task);
+  };
+
+  return { add, removeAll, remove, isEmpty, update };
 }
