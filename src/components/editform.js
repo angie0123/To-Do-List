@@ -4,8 +4,8 @@ export default function (event) {
   //dummy info
   const task = {
     name: "uhhh",
-    description: "errrr",
-    date: "2014-02-09",
+    description: "",
+    date: "",
     project: "inbox",
   };
 
