@@ -51,7 +51,7 @@ const addButtons = (container) => {
   const addBtn = document.createElement("button");
   addBtn.disabled = true;
   addBtn.addEventListener("click", submitHandler);
-  addBtn.classList.add("add-btn");
+  addBtn.classList.add("primary-btn");
   addBtn.classList.add("button");
   addBtn.textContent = "Add Task";
 
@@ -63,7 +63,7 @@ const addButtons = (container) => {
     parent.removeChild(form);
     parent.appendChild(addTask());
   });
-  cancelBtn.classList.add("cancel-btn");
+  cancelBtn.classList.add("secondary-btn");
   cancelBtn.classList.add("button");
   cancelBtn.textContent = "Cancel";
 
@@ -127,7 +127,7 @@ const addBtnInputs = (container) => {
 
 const nameHandler = (event) => {
   if (event.target.value != "") {
-    const addBtn = document.querySelector(".add-btn");
+    const addBtn = document.querySelector(".primary-btn");
     addBtn.disabled = false;
   } else {
     addBtn.disabled = true;

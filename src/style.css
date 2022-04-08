@@ -199,17 +199,17 @@ form .button option {
   font-weight: bold;
 }
 
-.button.add-btn {
+.button.primary-btn {
   background-color: #db4c3f;
   color: #fff;
 }
 
-.button.add-btn[disabled] {
+.button.primary-btn[disabled] {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-.button.cancel-btn {
+.button.secondary-btn {
   color: rgba(0, 0, 0, 0.9);
 }
 
