@@ -1,11 +1,12 @@
 import View from "../view";
+import addTask from "./addTodo";
 
 export default function (projects) {
   const form = View.createElement("form");
   form.setAttribute("id", "newForm");
   const formContent = View.createElement("div", "form-content");
 
-  form.append(formContent, btns());
+  form.append(formContent, btns(projects));
   formContent.append(...textInputs(), btnInputs(projects));
   return form;
 }
@@ -16,7 +17,7 @@ const textInputs = () => {
   return [name, description];
 };
 
-const btns = () => {
+const btns = (projects) => {
   const btnContainer = View.createElement("div", "btn-container");
 
   const addBtn = View.createElement("button", "primary-btn");
@@ -27,7 +28,9 @@ const btns = () => {
 
   const cancelBtn = View.createElement("button", "secondary-btn");
 
-  cancelBtn.addEventListener("click", cancelHandler);
+  cancelBtn.addEventListener("click", () => {
+    cancelHandler(projects);
+  });
   cancelBtn.classList.add("button");
   cancelBtn.textContent = "Cancel";
 
@@ -36,10 +39,10 @@ const btns = () => {
   return btnContainer;
 };
 
-const cancelHandler = (event) => {
+const cancelHandler = (projects) => {
   event.preventDefault();
   const form = document.getElementById("newForm");
-  form.replaceWith(addTask());
+  form.replaceWith(addTask(projects));
 };
 
 const nameField = () => {
@@ -108,6 +111,9 @@ const projectDropDown = (projects) => {
     listItem.value = project;
     dropdown.appendChild(listItem);
   });
+
+  projects.shift();
+
   return dropdown;
 };
 

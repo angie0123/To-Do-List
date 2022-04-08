@@ -1,20 +1,21 @@
 import View from "../view";
+import editForm from "./editform";
 
 //expect: list of todo objects
 //do: render each object to .taskList and return it
-export default function (todos) {
-  console.log("called!");
+export default function (todos, projects) {
   const list = View.createElement("div", "taskList");
 
   todos.forEach((todo) => {
-    const listItem = createTask(todo);
+    const listItem = createTask(todo, projects);
     list.append(listItem);
   });
 
   return list;
 }
 
-const createTask = ({ name, description, id }) => {
+const createTask = (todo, projects) => {
+  const { name, description } = todo;
   const task = View.createElement("div", "task");
   const checkbox = View.createElement("div", "circle-checkbox");
   const taskName = View.createElement("div", "task-name");
@@ -26,8 +27,7 @@ const createTask = ({ name, description, id }) => {
   task.append(checkbox, taskName, taskDescription);
 
   task.onclick = () => {
-    console.log(id);
-    // editForm(id);
+    editForm(todo, projects);
   };
 
   return task;

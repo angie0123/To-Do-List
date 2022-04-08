@@ -22,13 +22,19 @@ class View {
     renderMain(
       "inbox",
       [
-        { name: "ello", description: "meh", date: "", project: "inbox", id: 0 },
-        { name: "two", description: "meh", date: "", project: "inbox", id: 1 },
+        { name: "ello", description: "meh", date: "", project: "", id: 0 },
+        {
+          name: "two",
+          description: "meh",
+          date: "",
+          project: "welcome!",
+          id: 1,
+        },
         {
           name: "three",
           description: "meh",
           date: "",
-          project: "inbox",
+          project: "newProject",
           id: 2,
         },
       ],

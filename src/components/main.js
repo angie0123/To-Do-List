@@ -1,5 +1,4 @@
 import View from "../view";
-import addTask from "./addTodo";
 import taskList from "./taskList";
 import addTodo from "./addTodo";
 
@@ -8,7 +7,7 @@ export default function (route, todos, projects) {
   const container = View.createElement("div", "main-container");
   const main = View.createElement("div", "main");
   const heading = createHeading(route);
-  const existingTasks = taskList(todos);
+  const existingTasks = taskList(todos, projects);
   const addOption = addTodo(projects);
 
   container.append(main);

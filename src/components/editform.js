@@ -1,179 +1,138 @@
-import List from "../data/tasks";
+import View from "../view";
 
-export default function (index) {
-  const taskIndex = event.currentTarget.getAttribute("data-index");
-  const task = List.getItem(index);
+export default function (task, projects) {
+  const overlay = View.createElement("div", "overlay");
+  const card = View.createElement("div", "card");
+  const editForm = form(task, projects);
 
-  const overlay = document.createElement("div");
-  overlay.classList.add("overlay");
+  overlay.append(card);
+  card.append(editForm);
 
-  const card = document.createElement("div");
-  card.classList.add("card");
-  overlay.appendChild(card);
-
-  card.appendChild(form(task, index));
-
-  document.body.appendChild(overlay);
+  document.body.append(overlay);
 }
 
-const form = (task, index) => {
-  const form = document.createElement("form");
+const form = (task, projects) => {
+  const form = View.createElement("form");
   form.setAttribute("id", "editForm");
-  const formContent = document.createElement("div");
-  formContent.classList.add("form-content");
-  form.appendChild(formContent);
+  const formContent = View.createElement("div", "form-content");
 
-  addTextInputs(formContent, task);
-  addBtnInputs(formContent, task);
-  addButtons(form, index);
-
+  form.append(formContent, btns(task, projects));
+  formContent.append(...textInputs(task), btnInputs(task, projects));
   return form;
 };
 
-const addTextInputs = (container, task) => {
-  container.appendChild(nameField(task));
-  container.appendChild(descriptionField(task));
+const textInputs = ({ name, description }) => {
+  const nameContainer = nameField(name);
+  const descriptionContainer = descriptionField(description);
+  return [nameContainer, descriptionContainer];
 };
 
-const nameField = (task) => {
-  const nameField = document.createElement("div");
-  nameField.classList.add("input-container");
+const btns = (task, projects) => {
+  const btnContainer = View.createElement("div", "btn-container");
 
-  const labelName = document.createElement("label");
-  labelName.setAttribute("for", "name");
-  labelName.textContent = "Task Name";
-
-  const inputName = document.createElement("input");
-  inputName.setAttribute("id", "name");
-  inputName.value = task.name;
-
-  nameField.appendChild(labelName);
-  nameField.appendChild(inputName);
-
-  return nameField;
-};
-
-const descriptionField = (task) => {
-  const descriptionField = document.createElement("div");
-  descriptionField.classList.add("input-container");
-
-  const descriptionName = document.createElement("label");
-  descriptionName.setAttribute("for", "description");
-  descriptionName.textContent = "Task Description";
-
-  const descriptionInput = document.createElement("textarea");
-  descriptionInput.setAttribute("id", "description");
-
-  if (task.description == "") {
-    descriptionInput.setAttribute("placeholder", "Description");
-  } else {
-    descriptionInput.value = task.description;
-  }
-
-  descriptionField.appendChild(descriptionName);
-  descriptionField.appendChild(descriptionInput);
-  return descriptionField;
-};
-
-const addButtons = (container, index) => {
-  const btnContainer = document.createElement("div");
-  btnContainer.classList.add("btn-container");
-
-  const saveBtn = document.createElement("button");
-  saveBtn.addEventListener("click", () => {
-    submitHandler(index);
-  });
-  saveBtn.classList.add("primary-btn");
+  const saveBtn = View.createElement("button", "primary-btn");
   saveBtn.classList.add("button");
   saveBtn.textContent = "Save";
-
-  const cancelBtn = document.createElement("button");
-  cancelBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    const form = document.getElementById("editForm");
-    const parent = form.parentNode;
-    parent.removeChild(form);
-    parent.appendChild(addTask());
+  saveBtn.addEventListener("click", () => {
+    saveHandler(task);
   });
-  cancelBtn.classList.add("secondary-btn");
+
+  const cancelBtn = View.createElement("button", "secondary-btn");
+
+  cancelBtn.addEventListener("click", () => {
+    cancelHandler();
+  });
   cancelBtn.classList.add("button");
   cancelBtn.textContent = "Cancel";
 
-  btnContainer.appendChild(saveBtn);
-  btnContainer.appendChild(cancelBtn);
+  btnContainer.append(saveBtn, cancelBtn);
 
-  container.appendChild(btnContainer);
+  return btnContainer;
 };
 
-const addBtnInputs = (container, task) => {
-  const btnContainer = document.createElement("div");
-  btnContainer.classList.add("btn-inputs-container");
+const cancelHandler = () => {
+  event.preventDefault();
+  closeModal();
+};
 
-  const dateInput = document.createElement("input");
-  dateInput.classList.add("button");
+const nameField = (name) => {
+  const nameField = View.createElement("div", "input-container");
+
+  const labelName = View.createElement("label");
+  labelName.setAttribute("for", "name");
+  labelName.textContent = "Task Name";
+
+  const inputName = View.createElement("input");
+  inputName.setAttribute("id", "name");
+  inputName.setAttribute("placeholder", "eg. Take out the garbage by 10am");
+  inputName.value = name;
+
+  nameField.append(labelName, inputName);
+  return nameField;
+};
+
+const descriptionField = (description) => {
+  const descriptionField = View.createElement("div", "input-container");
+
+  const descriptionName = View.createElement("label");
+  descriptionName.setAttribute("for", "description");
+  descriptionName.textContent = "Task Description";
+
+  const descriptionInput = View.createElement("textarea");
+  descriptionInput.setAttribute("id", "description");
+  descriptionInput.setAttribute("placeholder", "Description");
+  descriptionInput.value = description;
+
+  descriptionField.append(descriptionName, descriptionInput);
+  return descriptionField;
+};
+
+const btnInputs = (task, projects) => {
+  const btnContainer = View.createElement("div", "btn-inputs-container");
+
+  const dateInput = View.createElement("input", "button");
   dateInput.setAttribute("id", "date");
   dateInput.setAttribute("type", "date");
 
-  if (task.date !== "") {
-    dateInput.value = task.date;
-  }
+  const projectOptions = projectDropDown(task, projects);
 
-  btnContainer.appendChild(dateInput);
+  btnContainer.append(dateInput, projectOptions);
 
-  btnContainer.appendChild(projectDropDown(task));
-
-  container.appendChild(btnContainer);
+  return btnContainer;
 };
 
-//dummy projects
-const projects = ["Welcome!", "New Project"];
-
-const projectDropDown = (task) => {
-  const dropdown = document.createElement("select");
+const projectDropDown = (task, projects) => {
+  const dropdown = View.createElement("select", "button");
   dropdown.setAttribute("id", "project");
-  dropdown.classList.add("button");
+  const list = [...projects];
 
-  const projectOption = createProjectOption(task.project);
-  dropdown.appendChild(projectOption);
-
-  for (let project of projects) {
-    const projectOption = createProjectOption(project);
-    dropdown.appendChild(projectOption);
+  if (task.project !== "") {
+    list.splice(projects.indexOf(task.project), 1);
+    list.unshift(task.project);
+  } else {
+    list.unshift("inbox");
   }
+
+  list.forEach((project) => {
+    const listItem = document.createElement("option");
+    listItem.textContent = project;
+    listItem.value = project;
+    dropdown.appendChild(listItem);
+  });
+
   return dropdown;
 };
 
-const createProjectOption = (project) => {
-  const projectOption = document.createElement("option");
-  projectOption.value = project;
-  projectOption.textContent = project;
-
-  return projectOption;
-};
-
-const submitHandler = (index) => {
+const saveHandler = (event) => {
   event.preventDefault();
 
-  updateList(index);
-  updateMain();
+  // model.addtodo
+  console.log("edit todo and update view");
+  //view.updateMain
   closeModal();
 };
 
 const closeModal = () => {
   const modal = document.querySelector(".overlay");
   modal.remove();
-};
-
-const updateList = (index) => {
-  const form = document.getElementById("editForm");
-  const formData = form.elements;
-
-  const newTask = {};
-  for (let input of formData) {
-    if (input.id) {
-      newTask[input.id] = input.value;
-    }
-  }
-
-  List.update(index, newTask);
 };
