@@ -1,4 +1,5 @@
 import View from "../View";
+import Modal from "./Modal";
 
 export default function (projects) {
   const sideNav = View.createElement("div", "side-nav");
@@ -35,6 +36,10 @@ const createProjectsNav = (projects) => {
   const addIcon = View.createElement("div", "project-add-button");
   addIcon.textContent = "+";
 
+  addIcon.addEventListener("click", () => {
+    Modal.render(newProjectForm());
+  });
+
   dropDownButton.append(icon, title);
   projectTitleDiv.append(dropDownButton, addIcon);
 
@@ -57,4 +62,52 @@ const toggleShowAllProjects = (projects) => {
     dropdown.remove();
     arrowIcon.textContent = "˃";
   }
+};
+
+const newProjectForm = () => {
+  const projectform = View.createElement("form", "projectForm");
+
+  const title = View.createElement("div", "heading");
+  title.textContent = "Add Project";
+
+  const nameLabel = View.createElement("label");
+  nameLabel.setAttribute("for", "name");
+  nameLabel.textContent = "Name";
+
+  const nameInput = View.createElement("input");
+  nameInput.setAttribute("id", "name");
+
+  const nameDiv = View.createElement("div", "input-container");
+
+  const btns = buttons();
+
+  nameDiv.append(nameLabel, nameInput);
+  projectform.append(title, nameDiv, btns);
+
+  return projectform;
+};
+
+const buttons = (handleAddProject) => {
+  const btnContainer = View.createElement("div", "btn-container");
+
+  const addBtn = View.createElement("button", "primary-btn");
+  addBtn.classList.add("button");
+  addBtn.disabled = true;
+  addBtn.textContent = "Add";
+  addBtn.addEventListener("click", () => {
+    event.preventDefault();
+
+    // handleAddTodo(newTodo);
+  });
+  const cancelBtn = View.createElement("button", "secondary-btn");
+
+  cancelBtn.addEventListener("click", () => {
+    // cancelHandler(projects);
+  });
+  cancelBtn.classList.add("button");
+  cancelBtn.textContent = "Cancel";
+
+  btnContainer.append(cancelBtn, addBtn);
+
+  return btnContainer;
 };
