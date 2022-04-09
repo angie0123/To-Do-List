@@ -57,9 +57,34 @@ ul li a {
   padding: inherit;
 }
 
-nav + nav {
+.projects-menu-header {
   margin-top: 15px;
   font-weight: bold;
+  display: flex;
+}
+
+.projects-menu-header .project-dropdown-icon {
+  width: 15px;
+  color: grey;
+}
+
+.projects-menu-header .project-add-button {
+  margin-left: auto;
+  width: 24px;
+  text-align: center;
+  font-size: 16px;
+  color: grey;
+  font-weight: normal;
+  background-color: #eee;
+  display: none;
+}
+
+.projects-title-container {
+  display: flex;
+}
+
+.projects-menu-header:hover .project-add-button {
+  display: block;
 }
 
 .main-container {

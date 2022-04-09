@@ -1,7 +1,7 @@
 class Model {
   constructor() {
     this.todos = [];
-    this.projects = [];
+    this.projects = ["Welcome!"];
   }
 
   addTodo({ name, description, date, project }) {

@@ -1,27 +1,41 @@
+import View from "../View";
+
 export default function (projects) {
-  const sideNav = document.createElement("div");
-  sideNav.classList.add("side-nav");
-
+  const sideNav = View.createElement("div", "side-nav");
   const nav = navList(["Inbox", "Today", "Upcoming"]);
+  const projectsNav = createProjectsNav(projects);
 
-  sideNav.appendChild(nav);
-  sideNav.appendChild(navList(projects));
-
+  sideNav.append(nav, projectsNav);
   document.body.appendChild(sideNav);
 }
 
 const navList = (list) => {
-  const nav = document.createElement("nav");
-  const ul = document.createElement("ul");
+  const nav = View.createElement("nav");
+  const ul = View.createElement("ul");
 
   for (let item of list) {
-    const element = document.createElement("li");
-    const link = document.createElement("a");
-    element.appendChild(link);
+    const element = View.createElement("li");
+    const link = View.createElement("a");
+    element.append(link);
     link.textContent = item;
-    ul.appendChild(element);
+    ul.append(element);
   }
 
-  nav.appendChild(ul);
+  nav.append(ul);
   return nav;
+};
+
+const createProjectsNav = () => {
+  const projectTitleDiv = View.createElement("div", "projects-menu-header");
+  const dropDownButton = View.createElement("div", "projects-title-container");
+  const title = View.createElement("div", "projects-title");
+  title.textContent = "Projects";
+  const icon = View.createElement("div", "project-dropdown-icon");
+  icon.textContent = ">";
+  const addIcon = View.createElement("div", "project-add-button");
+  addIcon.textContent = "+";
+
+  dropDownButton.append(icon, title);
+  projectTitleDiv.append(dropDownButton, addIcon);
+  return projectTitleDiv;
 };
