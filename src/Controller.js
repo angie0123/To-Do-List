@@ -17,6 +17,7 @@ class Controller {
 
   handleDeleteTodo(id) {
     this.model.deleteTodo(id);
+    console.log(this.model.todos);
   }
 
   handleEditTodo(id, todo) {

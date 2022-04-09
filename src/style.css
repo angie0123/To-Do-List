@@ -43,7 +43,7 @@ nav ul {
   list-style: none;
 }
 
-ul li {
+nav ul li {
   margin-left: -10px;
   padding: 5px 0 5px 5px;
 }
@@ -81,16 +81,17 @@ nav + nav {
 
 .addTask {
   display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
   align-items: center;
+  padding: 8px 0;
 }
 
 .addTask .icon {
   color: var(--red);
   font-size: 2rem;
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,7 +111,8 @@ nav + nav {
 
 .addTask .prompt {
   display: inline-block;
-  color: grey;
+  color: #808080;
+  font-size: 15px;
 }
 .addTask:hover .prompt {
   color: var(--red);
@@ -243,4 +245,50 @@ form .button option {
   line-height: 24px;
   width: clamp(450px, 50%, 650px);
   overflow-x: hidden;
+}
+
+/* tasks  */
+
+.task {
+  display: flex;
+  column-gap: 5px;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(220, 220, 220, 0.4);
+  font-size: 15px;
+}
+
+.circle-checkbox {
+  height: 16px;
+  width: 16px;
+  border: 1px solid grey;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.task .content {
+  display: grid;
+}
+
+.task .name {
+  line-height: 21px;
+  word-wrap: break-word;
+  word-break: break-word;
+  color: #202020;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.task .description {
+  font-size: 13px;
+  word-wrap: break-word;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  -webkit-line-orient: vertical;
+  overflow: hidden;
+  color: grey;
+}
+
+.task .date {
+  color: grey;
+  font-size: 13px;
 }
