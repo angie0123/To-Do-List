@@ -1,12 +1,12 @@
-import View from "../view";
+import View from "../View";
 import addTask from "./addTodo";
 
-export default function (projects) {
+export default function (projects, handleNewTodo) {
   const form = View.createElement("form");
   form.setAttribute("id", "newForm");
   const formContent = View.createElement("div", "form-content");
 
-  form.append(formContent, btns(projects));
+  form.append(formContent, btns(projects, handleNewTodo));
   formContent.append(...textInputs(), btnInputs(projects));
   return form;
 }
@@ -17,14 +17,25 @@ const textInputs = () => {
   return [name, description];
 };
 
-const btns = (projects) => {
+const btns = (projects, handleAddTodo) => {
   const btnContainer = View.createElement("div", "btn-container");
 
   const addBtn = View.createElement("button", "primary-btn");
   addBtn.classList.add("button");
   addBtn.disabled = true;
   addBtn.textContent = "Add Task";
-  addBtn.addEventListener("click", submitHandler);
+  addBtn.addEventListener("click", () => {
+    event.preventDefault();
+    const form = document.getElementById("newForm");
+    const newTodo = {};
+    [...form.elements].forEach((element) => {
+      if (element.id) newTodo[element.id] = element.value;
+      if (element.id === "project" && element.value === "inbox") {
+        newTodo[element.id] = "";
+      }
+    });
+    handleAddTodo(newTodo);
+  });
 
   const cancelBtn = View.createElement("button", "secondary-btn");
 
@@ -102,17 +113,20 @@ const enableSubmit = (event) => {
 const projectDropDown = (projects) => {
   const dropdown = View.createElement("select", "button");
   dropdown.setAttribute("id", "project");
+  let list = projects;
 
-  projects.unshift("inbox");
+  if (!projects) {
+    list = ["inbox"];
+  } else {
+    list.unshift("inbox");
+  }
 
-  projects.forEach((project) => {
+  list.forEach((project) => {
     const listItem = document.createElement("option");
     listItem.textContent = project;
     listItem.value = project;
     dropdown.appendChild(listItem);
   });
-
-  projects.shift();
 
   return dropdown;
 };

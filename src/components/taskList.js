@@ -1,4 +1,4 @@
-import View from "../view";
+import View from "../View";
 import editForm from "./editform";
 
 //expect: list of todo objects

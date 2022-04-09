@@ -27,7 +27,7 @@ class Model {
     this.todos = this.todos.filter((todo) => todo.id !== id);
   }
 
-  editTodo(id, { name, description, date, project }) {
+  editTodo(id, todo) {
     this.todos = this.todos.map((todo) => {
       if (todo.id === id) {
         return { name, description, date, project, id: todo.id };

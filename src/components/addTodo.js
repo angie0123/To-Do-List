@@ -1,7 +1,7 @@
-import View from "../view.js";
+import View from "../View.js";
 import newTaskForm from "./newForm";
 
-export default function addTask(projects) {
+const render = (projects, handleNewTodo) => {
   const addTask = View.createElement("div", "addTask");
 
   const addIcon = View.createElement("div", "icon");
@@ -13,8 +13,10 @@ export default function addTask(projects) {
   addTask.append(addIcon, message);
 
   addTask.onclick = () => {
-    addTask.replaceWith(newTaskForm(projects));
+    addTask.replaceWith(newTaskForm(projects, handleNewTodo));
   };
 
   return addTask;
-}
+};
+
+export default render;

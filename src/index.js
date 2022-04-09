@@ -1,18 +1,13 @@
 import "./style.css";
-import Nav from "./components/Nav";
-import SideNav from "./components/sideNav";
-import Main from "./components/main";
-import list from "./data/tasks";
-import Model from "./model";
-import View from "./view";
+import Model from "./Model";
+import View from "./View";
+import Controller from "./Controller";
 
-const model = new Model();
 const view = new View();
-view.render();
+const model = new Model();
+view.currentRoute = "inbox";
 
-// const nav = Nav();
-// document.body.appendChild(nav);
-// const sideNav = SideNav();
-// document.body.appendChild(sideNav);
-// const main = Main();
-// document.body.appendChild(main);
+const controller = new Controller(view, model);
+
+controller.init();
+controller.bindhandlers();

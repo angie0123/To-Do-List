@@ -1,4 +1,4 @@
-import View from "../view";
+import View from "../View";
 
 export default function (task, projects) {
   const overlay = View.createElement("div", "overlay");
@@ -123,7 +123,7 @@ const projectDropDown = (task, projects) => {
   return dropdown;
 };
 
-const saveHandler = (event) => {
+const saveHandler = (task) => {
   event.preventDefault();
 
   // model.addtodo
