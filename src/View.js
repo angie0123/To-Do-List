@@ -39,12 +39,16 @@ class View {
 
   render() {
     Nav();
-    SideNav(this.projects, this.handlers);
+    SideNav.render(this.projects, this.handlers);
     Main.render(this.currentRoute, this.todos, this.projects, this.handlers);
   }
 
   updateMain() {
     Main.render(this.currentRoute, this.todos, this.projects, this.handlers);
+  }
+
+  updateSideNav() {
+    SideNav.render(this.projects, this.handlers);
   }
 }
 

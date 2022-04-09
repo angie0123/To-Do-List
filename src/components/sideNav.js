@@ -1,8 +1,13 @@
 import View from "../View";
 import Modal from "./Modal";
 
-export default function (projects, { handleAddProject }) {
+function render(projects, { handleAddProject }) {
+  const prevModule = document.querySelector(".side-nav");
   const sideNav = View.createElement("div", "side-nav");
+
+  if (prevModule) {
+    prevModule.replaceWith(sideNav);
+  }
   const nav = navList(["Inbox", "Today", "Upcoming"]);
   const projectsNav = createProjectsNav(projects, handleAddProject);
 
@@ -108,6 +113,7 @@ const buttons = (handleAddProject) => {
     event.preventDefault();
     const nameInput = document.querySelector(".projectForm input#name");
     handleAddProject(nameInput.value);
+    Modal.close();
   });
   const cancelBtn = View.createElement("button", "secondary-btn");
 
@@ -122,3 +128,5 @@ const buttons = (handleAddProject) => {
 
   return btnContainer;
 };
+
+export default { render };

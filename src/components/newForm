@@ -130,11 +130,3 @@ const projectDropDown = (projects) => {
 
   return dropdown;
 };
-
-const submitHandler = (event) => {
-  event.preventDefault();
-
-  // model.addtodo
-  console.log("submit new todo event and update view");
-  //view.updateMain
-};

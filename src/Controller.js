@@ -30,7 +30,9 @@ class Controller {
 
   handleAddProject(name) {
     this.model.addProject(name);
-    console.log(this.model.projects);
+    this.view.setProjects(this.model.projects);
+    this.view.updateSideNav();
+    this.view.updateMain();
   }
 
   bindhandlers() {
