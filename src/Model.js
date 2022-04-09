@@ -28,6 +28,7 @@ class Model {
   }
 
   editTodo(id, todo) {
+    const { name, description, date, project } = todo;
     this.todos = this.todos.map((todo) => {
       if (todo.id === id) {
         return { name, description, date, project, id: todo.id };

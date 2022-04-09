@@ -1,9 +1,9 @@
 import View from "../View";
 
-export default function (task, projects) {
+export default function (task, projects, handleEditTodo) {
   const overlay = View.createElement("div", "overlay");
   const card = View.createElement("div", "card");
-  const editForm = form(task, projects);
+  const editForm = form(task, projects, handleEditTodo);
 
   overlay.append(card);
   card.append(editForm);
@@ -11,12 +11,12 @@ export default function (task, projects) {
   document.body.append(overlay);
 }
 
-const form = (task, projects) => {
+const form = (task, projects, handleEditTodo) => {
   const form = View.createElement("form");
   form.setAttribute("id", "editForm");
   const formContent = View.createElement("div", "form-content");
 
-  form.append(formContent, btns(task, projects));
+  form.append(formContent, btns(task, projects, handleEditTodo));
   formContent.append(...textInputs(task), btnInputs(task, projects));
   return form;
 };
@@ -27,14 +27,14 @@ const textInputs = ({ name, description }) => {
   return [nameContainer, descriptionContainer];
 };
 
-const btns = (task, projects) => {
+const btns = (task, projects, handleEditTodo) => {
   const btnContainer = View.createElement("div", "btn-container");
 
   const saveBtn = View.createElement("button", "primary-btn");
   saveBtn.classList.add("button");
   saveBtn.textContent = "Save";
   saveBtn.addEventListener("click", () => {
-    saveHandler(task);
+    saveHandler(task, handleEditTodo);
   });
 
   const cancelBtn = View.createElement("button", "secondary-btn");
@@ -104,16 +104,20 @@ const btnInputs = (task, projects) => {
 const projectDropDown = (task, projects) => {
   const dropdown = View.createElement("select", "button");
   dropdown.setAttribute("id", "project");
-  const list = [...projects];
+  const dropDownList = [];
 
-  if (task.project !== "") {
-    list.splice(projects.indexOf(task.project), 1);
-    list.unshift(task.project);
-  } else {
-    list.unshift("inbox");
+  if (projects) {
+    dropDownList.concat([...projects]);
   }
 
-  list.forEach((project) => {
+  if (task.project !== "") {
+    dropDownList.splice(projects.indexOf(task.project), 1);
+    dropDownList.unshift(task.project);
+  } else {
+    dropDownList.unshift("inbox");
+  }
+
+  dropDownList.forEach((project) => {
     const listItem = document.createElement("option");
     listItem.textContent = project;
     listItem.value = project;
@@ -123,12 +127,17 @@ const projectDropDown = (task, projects) => {
   return dropdown;
 };
 
-const saveHandler = (task) => {
+const saveHandler = (task, handleEditTodo) => {
   event.preventDefault();
-
-  // model.addtodo
-  console.log("edit todo and update view");
-  //view.updateMain
+  const form = document.getElementById("editForm");
+  const newTodo = {};
+  [...form.elements].forEach((element) => {
+    if (element.id) newTodo[element.id] = element.value;
+    if (element.id === "project" && element.value === "inbox") {
+      newTodo[element.id] = "";
+    }
+  });
+  handleEditTodo(task.id, newTodo);
   closeModal();
 };
 

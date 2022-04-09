@@ -21,14 +21,15 @@ class Controller {
 
   handleEditTodo(id, todo) {
     this.model.editTodo(id, todo);
+    console.log("Edited: now ", this.model.todos);
   }
 
   bindhandlers() {
     const self = this;
     this.view.setHandlers({
       handleNewTodo: self.handleNewTodo.bind(self),
-      handleDeleteTodo: self.handleDeleteTodo(self),
-      handleEditTodo: self.handleEditTodo(self),
+      handleDeleteTodo: self.handleDeleteTodo.bind(self),
+      handleEditTodo: self.handleEditTodo.bind(self),
     });
   }
 }

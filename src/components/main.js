@@ -32,10 +32,6 @@ const render = (
   document.body.append(container);
 };
 
-const bindAddTodoHandler = (handler) => {
-  addTodo.bindAddTodoHandler(handler);
-};
-
 const createHeading = (route) => {
   const h1 = document.createElement("h1");
   h1.textContent = route;
@@ -43,4 +39,4 @@ const createHeading = (route) => {
   return h1;
 };
 
-export default { render, bindAddTodoHandler };
+export default { render };
