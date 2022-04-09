@@ -1,14 +1,9 @@
 import View from "../View";
+import Modal from "./Modal";
 
 export default function (task, projects, handleEditTodo) {
-  const overlay = View.createElement("div", "overlay");
-  const card = View.createElement("div", "card");
   const editForm = form(task, projects, handleEditTodo);
-
-  overlay.append(card);
-  card.append(editForm);
-
-  document.body.append(overlay);
+  Modal.render(editForm);
 }
 
 const form = (task, projects, handleEditTodo) => {
@@ -52,7 +47,7 @@ const btns = (task, projects, handleEditTodo) => {
 
 const cancelHandler = () => {
   event.preventDefault();
-  closeModal();
+  Modal.close();
 };
 
 const nameField = (name) => {
@@ -138,10 +133,5 @@ const saveHandler = (task, handleEditTodo) => {
     }
   });
   handleEditTodo(task.id, newTodo);
-  closeModal();
-};
-
-const closeModal = () => {
-  const modal = document.querySelector(".overlay");
-  modal.remove();
+  Modal.close();
 };

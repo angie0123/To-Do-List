@@ -86,10 +86,15 @@ ul li a {
 
 .projects-title-container {
   display: flex;
+  height: 22px;
 }
 
 .projects-menu-header:hover .project-add-button {
   display: block;
+}
+
+.project-dropdown li {
+  padding-left: 13px;
 }
 
 .main-container {
