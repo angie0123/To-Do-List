@@ -88,7 +88,7 @@ nav + nav {
 
 .addTask .icon {
   color: var(--red);
-  font-size: 2rem;
+  font-size: 1.7rem;
   display: inline-block;
   width: 18px;
   height: 18px;

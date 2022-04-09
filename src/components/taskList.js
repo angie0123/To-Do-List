@@ -33,6 +33,7 @@ const createTask = (todo, projects, handleEditTodo, handleDeleteTodo) => {
   taskName.textContent = name;
 
   checkbox.addEventListener("click", () => {
+    event.stopPropagation();
     handleDeleteTodo(todo.id);
   });
 
