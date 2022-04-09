@@ -3,7 +3,6 @@ import SideNav from "./components/sideNav";
 import Main from "./components/main";
 
 class View {
-  handlers = {};
   constructor(todos, projects, route) {
     this.todos = todos;
     this.projects = projects;
@@ -16,6 +15,10 @@ class View {
       element.classList.add(className);
     }
     return element;
+  }
+
+  setProjects(projects) {
+    this.projects = projects;
   }
 
   setHandlers(handlers) {
@@ -36,7 +39,8 @@ class View {
 
   render() {
     Nav();
-    SideNav(["projects"]); // expects all projects
+    console.log(this.projects);
+    SideNav(this.projects); // expects all projects
     Main.render(this.currentRoute, this.todos, this.projects, this.handlers);
   }
 

@@ -5,6 +5,7 @@ class Controller {
   }
 
   init() {
+    this.view.setProjects(this.model.projects);
     this.bindhandlers();
     this.view.render();
   }

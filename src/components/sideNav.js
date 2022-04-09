@@ -25,17 +25,36 @@ const navList = (list) => {
   return nav;
 };
 
-const createProjectsNav = () => {
+const createProjectsNav = (projects) => {
   const projectTitleDiv = View.createElement("div", "projects-menu-header");
   const dropDownButton = View.createElement("div", "projects-title-container");
   const title = View.createElement("div", "projects-title");
   title.textContent = "Projects";
   const icon = View.createElement("div", "project-dropdown-icon");
-  icon.textContent = ">";
+  icon.textContent = "˃";
   const addIcon = View.createElement("div", "project-add-button");
   addIcon.textContent = "+";
 
   dropDownButton.append(icon, title);
   projectTitleDiv.append(dropDownButton, addIcon);
+
+  dropDownButton.addEventListener("click", () => {
+    toggleShowAllProjects(projects);
+  });
   return projectTitleDiv;
+};
+
+const toggleShowAllProjects = (projects) => {
+  const dropdown = document.querySelector(".project-dropdown");
+  const arrowIcon = document.querySelector(".project-dropdown-icon");
+  if (dropdown === null) {
+    const sideNav = document.querySelector(".side-nav");
+    const allProjects = navList(projects);
+    allProjects.classList.add("project-dropdown");
+    arrowIcon.textContent = "˅";
+    sideNav.append(allProjects);
+  } else {
+    dropdown.remove();
+    arrowIcon.textContent = "˃";
+  }
 };
