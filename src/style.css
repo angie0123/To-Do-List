@@ -278,7 +278,7 @@ form .button option {
   padding: 20px 24px;
   font-size: 16px;
   line-height: 24px;
-  width: clamp(450px, 50%, 650px);
+  width: clamp(auto, 50%, 650px);
   overflow-x: hidden;
 }
 
@@ -326,4 +326,42 @@ form .button option {
 .task .date {
   color: grey;
   font-size: 13px;
+}
+
+/* PROJECT FORM STYLES */
+
+.projectForm {
+  width: 500px;
+}
+
+.projectForm label {
+  display: block;
+  font-size: 15px;
+}
+
+.projectForm .heading,
+.projectForm label {
+  font-weight: bold;
+}
+
+.projectForm .heading {
+  padding: 14px 0;
+  font-size: 18px;
+  border-bottom: 1px solid #ddd;
+}
+
+.projectForm input {
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 5px;
+  width: calc(100% - 12px);
+}
+
+.projectForm .input-container {
+  padding: 20px 0;
+}
+
+.projectForm .btn-container {
+  justify-content: flex-end;
 }

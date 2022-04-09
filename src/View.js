@@ -39,8 +39,7 @@ class View {
 
   render() {
     Nav();
-    console.log(this.projects);
-    SideNav(this.projects); // expects all projects
+    SideNav(this.projects, this.handlers);
     Main.render(this.currentRoute, this.todos, this.projects, this.handlers);
   }
 

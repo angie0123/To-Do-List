@@ -28,12 +28,18 @@ class Controller {
     this.view.updateMain();
   }
 
+  handleAddProject(name) {
+    this.model.addProject(name);
+    console.log(this.model.projects);
+  }
+
   bindhandlers() {
     const self = this;
     this.view.setHandlers({
       handleNewTodo: self.handleNewTodo.bind(self),
       handleDeleteTodo: self.handleDeleteTodo.bind(self),
       handleEditTodo: self.handleEditTodo.bind(self),
+      handleAddProject: self.handleAddProject.bind(self),
     });
   }
 }

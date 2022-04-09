@@ -1,10 +1,10 @@
 import View from "../View";
 import Modal from "./Modal";
 
-export default function (projects) {
+export default function (projects, { handleAddProject }) {
   const sideNav = View.createElement("div", "side-nav");
   const nav = navList(["Inbox", "Today", "Upcoming"]);
-  const projectsNav = createProjectsNav(projects);
+  const projectsNav = createProjectsNav(projects, handleAddProject);
 
   sideNav.append(nav, projectsNav);
   document.body.appendChild(sideNav);
@@ -26,7 +26,7 @@ const navList = (list) => {
   return nav;
 };
 
-const createProjectsNav = (projects) => {
+const createProjectsNav = (projects, handleAddProject) => {
   const projectTitleDiv = View.createElement("div", "projects-menu-header");
   const dropDownButton = View.createElement("div", "projects-title-container");
   const title = View.createElement("div", "projects-title");
@@ -37,7 +37,7 @@ const createProjectsNav = (projects) => {
   addIcon.textContent = "+";
 
   addIcon.addEventListener("click", () => {
-    Modal.render(newProjectForm());
+    Modal.render(newProjectForm(handleAddProject));
   });
 
   dropDownButton.append(icon, title);
@@ -64,7 +64,7 @@ const toggleShowAllProjects = (projects) => {
   }
 };
 
-const newProjectForm = () => {
+const newProjectForm = (handleAddProject) => {
   const projectform = View.createElement("form", "projectForm");
 
   const title = View.createElement("div", "heading");
@@ -76,15 +76,25 @@ const newProjectForm = () => {
 
   const nameInput = View.createElement("input");
   nameInput.setAttribute("id", "name");
+  nameInput.addEventListener("keyup", enableSubmit);
 
   const nameDiv = View.createElement("div", "input-container");
 
-  const btns = buttons();
+  const btns = buttons(handleAddProject);
 
   nameDiv.append(nameLabel, nameInput);
   projectform.append(title, nameDiv, btns);
 
   return projectform;
+};
+
+const enableSubmit = (event) => {
+  const submitBtn = document.querySelector(".projectForm .primary-btn");
+  if (event.target.value != "") {
+    submitBtn.disabled = false;
+  } else {
+    submitBtn.disabled = true;
+  }
 };
 
 const buttons = (handleAddProject) => {
@@ -96,13 +106,14 @@ const buttons = (handleAddProject) => {
   addBtn.textContent = "Add";
   addBtn.addEventListener("click", () => {
     event.preventDefault();
-
-    // handleAddTodo(newTodo);
+    const nameInput = document.querySelector(".projectForm input#name");
+    handleAddProject(nameInput.value);
   });
   const cancelBtn = View.createElement("button", "secondary-btn");
 
   cancelBtn.addEventListener("click", () => {
-    // cancelHandler(projects);
+    event.preventDefault();
+    Modal.close();
   });
   cancelBtn.classList.add("button");
   cancelBtn.textContent = "Cancel";

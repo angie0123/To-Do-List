@@ -16,11 +16,11 @@ class Model {
   }
 
   addProject(name) {
-    this.projects.push({ name, id: this.projects.length });
+    this.projects.push(name);
   }
 
-  deleteProject(id) {
-    this.projects = this.projects.filter((project) => project.id !== id);
+  deleteProject(name) {
+    this.projects = this.projects.filter((project) => project.name !== name);
   }
 
   deleteTodo(id) {
