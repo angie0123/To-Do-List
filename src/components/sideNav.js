@@ -13,6 +13,7 @@ function render(projects, { handleAddProject }) {
 
   sideNav.append(nav, projectsNav);
   document.body.appendChild(sideNav);
+  toggleShowAllProjects(projects);
 }
 
 const navList = (list) => {

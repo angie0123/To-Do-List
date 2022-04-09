@@ -87,6 +87,7 @@ ul li a {
 .projects-title-container {
   display: flex;
   height: 22px;
+  width: 100%;
 }
 
 .projects-menu-header:hover .project-add-button {
