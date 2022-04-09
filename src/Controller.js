@@ -21,7 +21,8 @@ class Controller {
 
   handleEditTodo(id, todo) {
     this.model.editTodo(id, todo);
-    console.log("Edited: now ", this.model.todos);
+    this.view.setTodos(this.model.todos);
+    this.view.updateMain();
   }
 
   bindhandlers() {
