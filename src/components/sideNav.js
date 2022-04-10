@@ -17,7 +17,8 @@ function render(projects, { handleAddProject, handleDeleteProject }) {
   );
 
   sideNav.append(nav, projectsNav);
-  document.body.appendChild(sideNav);
+  const header = document.querySelector(".nav");
+  header.after(sideNav);
   toggleShowAllProjects(projects, handleDeleteProject);
 }
 

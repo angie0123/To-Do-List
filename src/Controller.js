@@ -37,7 +37,8 @@ class Controller {
 
   handleDeleteProject(id) {
     this.model.deleteProject(id);
-    console.log("deleted!", this.model.projects);
+    this.view.setProjects(this.model.projects);
+    this.view.updateSideNav();
   }
 
   bindhandlers() {
