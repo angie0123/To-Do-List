@@ -366,3 +366,26 @@ form .button option {
 .projectForm .btn-container {
   justify-content: flex-end;
 }
+
+/* PROJECT LINKS */
+
+.project-dropdown li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-dropdown .delete-btn {
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+  color: grey;
+  display: none;
+}
+
+.project-dropdown:hover .delete-btn {
+  background-color: rgb(185, 185, 185);
+  display: flex;
+}

@@ -61,7 +61,7 @@ const toggleShowAllProjects = (projects) => {
   const arrowIcon = document.querySelector(".project-dropdown-icon");
   if (dropdown === null) {
     const sideNav = document.querySelector(".side-nav");
-    const allProjects = navList(projects);
+    const allProjects = navListProjects(projects);
     allProjects.classList.add("project-dropdown");
     arrowIcon.textContent = "˅";
     sideNav.append(allProjects);
@@ -69,6 +69,24 @@ const toggleShowAllProjects = (projects) => {
     dropdown.remove();
     arrowIcon.textContent = "˃";
   }
+};
+
+const navListProjects = (list) => {
+  const nav = View.createElement("nav");
+  const ul = View.createElement("ul");
+
+  for (let item of list) {
+    const element = View.createElement("li");
+    const link = View.createElement("a");
+    const deleteBtn = View.createElement("div", "delete-btn");
+    deleteBtn.textContent = "—";
+    element.append(link, deleteBtn);
+    link.textContent = item;
+    ul.append(element);
+  }
+
+  nav.append(ul);
+  return nav;
 };
 
 export default { render };
