@@ -2,12 +2,30 @@ class Controller {
   constructor(view, model) {
     this.view = view;
     this.model = model;
+    this.routes = ["Inbox", "Today", "Upcoming"];
   }
-
   init() {
     this.view.setProjects(this.model.projects);
+    this.model.todos = [
+      {
+        name: "fdsfs",
+        description: "sdfds",
+        date: "sdfdsfds",
+        project: "dsf",
+        id: 0,
+      },
+    ];
+    this.reroute("Inbox");
     this.bindhandlers();
     this.view.render();
+  }
+
+  reroute(routeID) {
+    if (routeID === "Inbox") {
+      this.view.setRoute("Inbox");
+      const noProjectTodos = this.model.getNoProjectTodos();
+      this.view.setTodos(noProjectTodos);
+    }
   }
 
   handleNewTodo(todo) {

@@ -22,7 +22,6 @@ class Model {
 
   deleteProject(id) {
     this.projects = this.projects.filter((project) => project.id !== id);
-    console.log("deleted!" + this.projects);
   }
 
   deleteTodo(id) {
@@ -37,6 +36,13 @@ class Model {
       }
       return todo;
     });
+  }
+
+  getNoProjectTodos() {
+    const noProjectTodos = this.todos.filter((todo) => {
+      return todo.project === "";
+    });
+    return noProjectTodos;
   }
 }
 
