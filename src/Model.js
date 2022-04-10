@@ -1,7 +1,7 @@
 class Model {
   constructor() {
     this.todos = [];
-    this.projects = ["Welcome!"];
+    this.projects = [{ name: "Welcome!", id: 0 }];
   }
 
   addTodo({ name, description, date, project }) {
@@ -16,11 +16,13 @@ class Model {
   }
 
   addProject(name) {
-    this.projects.push(name);
+    const project = { name, id: this.projects.length };
+    this.projects.push(project);
   }
 
-  deleteProject(name) {
-    this.projects = this.projects.filter((project) => project.name !== name);
+  deleteProject(id) {
+    this.projects = this.projects.filter((project) => project.id !== id);
+    console.log("deleted!" + this.projects);
   }
 
   deleteTodo(id) {

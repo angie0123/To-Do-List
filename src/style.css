@@ -39,6 +39,10 @@ body {
   font-size: 14px;
 }
 
+.side-nav li {
+  height: 34px;
+}
+
 nav ul {
   list-style: none;
 }
@@ -385,7 +389,14 @@ form .button option {
   display: none;
 }
 
-.project-dropdown:hover .delete-btn {
+.project-dropdown li:hover .delete-btn {
   background-color: rgb(185, 185, 185);
   display: flex;
+}
+
+.project-dropdown li a {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 160px;
 }

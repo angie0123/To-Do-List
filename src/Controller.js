@@ -35,6 +35,11 @@ class Controller {
     this.view.updateMain();
   }
 
+  handleDeleteProject(id) {
+    this.model.deleteProject(id);
+    console.log("deleted!", this.model.projects);
+  }
+
   bindhandlers() {
     const self = this;
     this.view.setHandlers({
@@ -42,6 +47,7 @@ class Controller {
       handleDeleteTodo: self.handleDeleteTodo.bind(self),
       handleEditTodo: self.handleEditTodo.bind(self),
       handleAddProject: self.handleAddProject.bind(self),
+      handleDeleteProject: self.handleDeleteProject.bind(self),
     });
   }
 }
