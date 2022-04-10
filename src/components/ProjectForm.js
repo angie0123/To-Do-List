@@ -54,6 +54,7 @@ const buttons = (handleAddProject) => {
     Modal.close();
   });
   cancelBtn.classList.add("button");
+  cancelBtn.setAttribute("type", "button");
   cancelBtn.textContent = "Cancel";
 
   btnContainer.append(cancelBtn, addBtn);
