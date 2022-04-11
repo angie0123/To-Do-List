@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 class Model {
   constructor() {
     this.todos = [];
@@ -43,6 +45,14 @@ class Model {
       return todo.project === "";
     });
     return noProjectTodos;
+  }
+
+  getTodayTodos() {
+    const todayTodos = this.todos.filter((todo) => {
+      const today = format(new Date(), "yyyy-MM-dd");
+      return todo.date === today;
+    });
+    return todayTodos;
   }
 }
 

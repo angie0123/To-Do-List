@@ -6,27 +6,27 @@ class Controller {
   }
   init() {
     this.view.setProjects(this.model.projects);
-    this.model.todos = [
-      {
-        name: "fdsfs",
-        description: "sdfds",
-        date: "sdfdsfds",
-        project: "dsf",
-        id: 0,
-      },
-    ];
-    this.handleRoute("Inbox");
     this.bindhandlers();
+    this.setRoute("Inbox");
     this.view.render();
   }
 
-  handleRoute(routeID) {
+  setRoute(routeID) {
     if (routeID === "Inbox") {
       this.view.setRoute("Inbox");
       const noProjectTodos = this.model.getNoProjectTodos();
       this.view.setTodos(noProjectTodos);
     }
-    console.log("handle route!", routeID);
+    if (routeID === "Today") {
+      this.view.setRoute("Today");
+      const todayTodos = this.model.getTodayTodos();
+      this.view.setTodos(todayTodos);
+    }
+  }
+
+  handleRoute(routeID) {
+    this.setRoute(routeID);
+    this.view.updateMain();
   }
 
   handleNewTodo(todo) {
