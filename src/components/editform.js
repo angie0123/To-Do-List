@@ -11,7 +11,7 @@ const form = (task, projects, handleEditTodo) => {
   form.setAttribute("id", "editForm");
   const formContent = View.createElement("div", "form-content");
 
-  form.append(formContent, btns(task, projects, handleEditTodo));
+  form.append(formContent, btns(task, handleEditTodo));
   formContent.append(...textInputs(task), btnInputs(task, projects));
   return form;
 };
@@ -22,7 +22,7 @@ const textInputs = ({ name, description }) => {
   return [nameContainer, descriptionContainer];
 };
 
-const btns = (task, projects, handleEditTodo) => {
+const btns = (task, handleEditTodo) => {
   const btnContainer = View.createElement("div", "btn-container");
 
   const saveBtn = View.createElement("button", "primary-btn");
@@ -99,23 +99,16 @@ const btnInputs = (task, projects) => {
 const projectDropDown = (task, projects) => {
   const dropdown = View.createElement("select", "button");
   dropdown.setAttribute("id", "project");
-  const dropDownList = [];
+  let dropDownList = [{ name: "Inbox" }];
 
   if (projects) {
-    dropDownList.concat([...projects]);
-  }
-
-  if (task.project !== "") {
-    dropDownList.splice(projects.indexOf(task.project), 1);
-    dropDownList.unshift(task.project);
-  } else {
-    dropDownList.unshift("inbox");
+    dropDownList = dropDownList.concat(projects);
   }
 
   dropDownList.forEach((project) => {
     const listItem = document.createElement("option");
-    listItem.textContent = project;
-    listItem.value = project;
+    listItem.textContent = project.name;
+    listItem.value = project.name;
     dropdown.appendChild(listItem);
   });
 
@@ -128,7 +121,7 @@ const saveHandler = (task, handleEditTodo) => {
   const newTodo = {};
   [...form.elements].forEach((element) => {
     if (element.id) newTodo[element.id] = element.value;
-    if (element.id === "project" && element.value === "inbox") {
+    if (element.id === "project" && element.value === "Inbox") {
       newTodo[element.id] = "";
     }
   });

@@ -17,7 +17,7 @@ const textInputs = () => {
   return [name, description];
 };
 
-const btns = (projects, handleAddTodo) => {
+const btns = (projects, handleNewTodo) => {
   const btnContainer = View.createElement("div", "btn-container");
 
   const addBtn = View.createElement("button", "primary-btn");
@@ -30,11 +30,11 @@ const btns = (projects, handleAddTodo) => {
     const newTodo = {};
     [...form.elements].forEach((element) => {
       if (element.id) newTodo[element.id] = element.value;
-      if (element.id === "project" && element.value === "inbox") {
+      if (element.id === "project" && element.value === "Inbox") {
         newTodo[element.id] = "";
       }
     });
-    handleAddTodo(newTodo);
+    handleNewTodo(newTodo);
   });
 
   const cancelBtn = View.createElement("button", "secondary-btn");
@@ -113,18 +113,15 @@ const enableSubmit = (event) => {
 const projectDropDown = (projects) => {
   const dropdown = View.createElement("select", "button");
   dropdown.setAttribute("id", "project");
-  let list = projects;
-
-  if (!projects) {
-    list = ["inbox"];
-  } else {
-    list.unshift("inbox");
+  let list = [{ name: "Inbox" }];
+  if (projects) {
+    list = list.concat(projects);
   }
 
   list.forEach((project) => {
     const listItem = document.createElement("option");
-    listItem.textContent = project;
-    listItem.value = project;
+    listItem.textContent = project.name;
+    listItem.value = project.name;
     dropdown.appendChild(listItem);
   });
 
