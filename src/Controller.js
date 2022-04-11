@@ -77,6 +77,17 @@ class Controller {
       handleRoute: self.handleRoute.bind(self),
     });
   }
+
+  enableSaveData() {
+    const self = this;
+    window.addEventListener("beforeunload", function (evt) {
+      window.localStorage.setItem("app", JSON.stringify(self));
+      evt.preventDefault();
+      evt.returnValue = "";
+
+      return null;
+    });
+  }
 }
 
 export default Controller;
