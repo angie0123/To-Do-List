@@ -31,19 +31,19 @@ class Controller {
 
   handleNewTodo(todo) {
     this.model.addTodo(todo);
-    this.view.setTodos(this.model.todos);
+    this.setRoute(this.view.currentRoute);
     this.view.updateMain();
   }
 
   handleDeleteTodo(id) {
     this.model.deleteTodo(id);
-    this.view.setTodos(this.model.todos);
+    this.setRoute(this.view.currentRoute);
     this.view.updateMain();
   }
 
   handleEditTodo(id, todo) {
     this.model.editTodo(id, todo);
-    this.view.setTodos(this.model.todos);
+    this.setRoute(this.view.currentRoute);
     this.view.updateMain();
   }
 
