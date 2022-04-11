@@ -15,17 +15,18 @@ class Controller {
         id: 0,
       },
     ];
-    this.reroute("Inbox");
+    this.handleRoute("Inbox");
     this.bindhandlers();
     this.view.render();
   }
 
-  reroute(routeID) {
+  handleRoute(routeID) {
     if (routeID === "Inbox") {
       this.view.setRoute("Inbox");
       const noProjectTodos = this.model.getNoProjectTodos();
       this.view.setTodos(noProjectTodos);
     }
+    console.log("handle route!", routeID);
   }
 
   handleNewTodo(todo) {
@@ -67,6 +68,7 @@ class Controller {
       handleEditTodo: self.handleEditTodo.bind(self),
       handleAddProject: self.handleAddProject.bind(self),
       handleDeleteProject: self.handleDeleteProject.bind(self),
+      handleRoute: self.handleRoute.bind(self),
     });
   }
 }
