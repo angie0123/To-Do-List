@@ -54,6 +54,13 @@ class Model {
     });
     return todayTodos;
   }
+
+  getProjectTodos(name) {
+    const projectTodos = this.todos.filter((todo) => {
+      return todo.project === name;
+    });
+    return projectTodos;
+  }
 }
 
 export default Model;

@@ -16,12 +16,21 @@ class Controller {
       this.view.setRoute("Inbox");
       const noProjectTodos = this.model.getNoProjectTodos();
       this.view.setTodos(noProjectTodos);
+      return;
     }
     if (routeID === "Today") {
       this.view.setRoute("Today");
       const todayTodos = this.model.getTodayTodos();
       this.view.setTodos(todayTodos);
+      return;
     }
+    this.model.projects.forEach((project) => {
+      if (project.name === routeID) {
+        this.view.setRoute(project.name);
+        const projectTodos = this.model.getProjectTodos(project.name);
+        this.view.setTodos(projectTodos);
+      }
+    });
   }
 
   handleRoute(routeID) {
@@ -31,20 +40,17 @@ class Controller {
 
   handleNewTodo(todo) {
     this.model.addTodo(todo);
-    this.setRoute(this.view.currentRoute);
-    this.view.updateMain();
+    this.handleRoute(this.view.currentRoute);
   }
 
   handleDeleteTodo(id) {
     this.model.deleteTodo(id);
-    this.setRoute(this.view.currentRoute);
-    this.view.updateMain();
+    this.handleRoute(this.view.currentRoute);
   }
 
   handleEditTodo(id, todo) {
     this.model.editTodo(id, todo);
-    this.setRoute(this.view.currentRoute);
-    this.view.updateMain();
+    this.handleRoute(this.view.currentRoute);
   }
 
   handleAddProject(name) {

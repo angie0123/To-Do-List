@@ -100,7 +100,7 @@ const navListProjects = (projects, handleDeleteProject, handleRoute) => {
     const element = View.createElement("li");
     const link = View.createElement("a");
     link.addEventListener("click", () => {
-      handleRoute(item.id);
+      handleRoute(item.name);
     });
     const deleteBtn = View.createElement("div", "delete-btn");
     deleteBtn.textContent = "—";
